@@ -15,7 +15,7 @@ const TitleRow = (props: IProps) => {
     let rating = title.imDbRating
 
     return (
-        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('MovieDetails', { selectedTitle: title })}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('TitleDetails', { selectedTitle: title })}>
 
             <Image style={styles.thumbnail} source={{ uri: title.image }} />
 

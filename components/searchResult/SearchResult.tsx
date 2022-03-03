@@ -16,7 +16,7 @@ const SearchResult = (props: IProps) => {
     let description = title.description
 
     return (
-        <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate('MovieDetails', { selectedTitle: title }); }}>
+        <TouchableOpacity style={styles.container} onPress={() => { navigation.navigate('TitleDetails', { selectedTitle: title }); }}>
             <Image style={styles.thumbnail} source={{ uri: imgUrl }} />
 
             <View style={styles.innerContainer} >

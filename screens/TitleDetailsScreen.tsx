@@ -16,7 +16,7 @@ type IProps = {
     selectedTitle?: Title;
 }
 
-export const MovieDetailsScreen = (props: IProps) => {
+export const TitleDetailsScreen = (props: IProps) => {
     const { navigation } = props;
     const { selectedTitle } = props.route.params
 
@@ -198,4 +198,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default MovieDetailsScreen;
+export default TitleDetailsScreen;
