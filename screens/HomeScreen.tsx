@@ -4,9 +4,9 @@ import SearchBar from '../components/searchBar/SearchBar';
 import Header from '../components/header/Header';
 import TitleRow from '../components/titleRow/TitleRow';
 import { Title } from '../types/Title'
+import AnimationView from '../components/animationView/AnimationView';
 import { Endpoints } from "../util/Constants";
 import axios from "axios";
-import AnimationView from '../components/animationView/AnimationView';
 
 interface IProps {
     navigation: any;
@@ -55,55 +55,53 @@ export const HomeScreen = (props: IProps) => {
         );
     };
 
-    if (!isLoading){
-        return (
-            <ScrollView style={styles.scrollViewContainer}>
-                <View style={styles.searchBarContainer}  >
-                    <TouchableOpacity style={styles.searchBarOverlay} onPress={() => navigation.navigate('Search')}>
-                        <SearchBar isEditable={false} query={null} setQuery={null} searchFromQuery={null} onPress={() => navigation.navigate('Search')} />
-                    </TouchableOpacity>
-                </View>
-    
-                <Header title={'Trending'} />
-                <View style={styles.titlesScrollViewContainer} >
-                    {popularTitles.length > 0 &&
-                        <FlatList
-                            horizontal={true}
-                            data={popularTitles}
-                            renderItem={renderItem}
-                        />
-                    }
-                </View>
-    
-                <Header title={'Critically Acclaimed'} />
-                <View style={{...styles.titlesScrollViewContainer, height: 350}} >
-                    {acclaimedTitles.length > 0 &&
-                        <FlatList
-                            horizontal={true}
-                            data={acclaimedTitles}
-                            renderItem={renderItem}
-                        />
-                    }
-                </View>
-    
-            </ScrollView>
-        );
-    }else{
-        return (
-            <ScrollView style={styles.scrollViewContainer}>
-                <View style={styles.searchBarContainer}  >
-                    <TouchableOpacity style={styles.searchBarOverlay} onPress={() => navigation.navigate('Search')}>
-                        <SearchBar isEditable={false} query={null} setQuery={null} searchFromQuery={null} onPress={() => navigation.navigate('Search')} />
-                    </TouchableOpacity>
-                </View>
+    return (
+        <ScrollView style={styles.scrollViewContainer}>
+            {!isLoading ? (
+                <>
+                    <View style={styles.searchBarContainer}  >
+                        <TouchableOpacity style={styles.searchBarOverlay} onPress={() => navigation.navigate('Search')}>
+                            <SearchBar isEditable={false} query={null} setQuery={null} searchFromQuery={null} onPress={() => navigation.navigate('Search')} />
+                        </TouchableOpacity>
+                    </View>
 
-                <View style={styles.innerContainer}>
-                    <AnimationView option={3}/>
-                </View>
-    
-            </ScrollView>
-        );
-    }
+                    <Header title={'Trending'} />
+                    <View style={styles.titlesScrollViewContainer} >
+                        {popularTitles.length > 0 &&
+                            <FlatList
+                                horizontal={true}
+                                data={popularTitles}
+                                renderItem={renderItem}
+                            />
+                        }
+                    </View>
+
+                    <Header title={'Critically Acclaimed'} />
+                    <View style={{ ...styles.titlesScrollViewContainer, height: 350 }} >
+                        {acclaimedTitles.length > 0 &&
+                            <FlatList
+                                horizontal={true}
+                                data={acclaimedTitles}
+                                renderItem={renderItem}
+                            />
+                        }
+                    </View>
+                </>
+            ) : (
+                <>
+                    <View style={styles.searchBarContainer}  >
+                        <TouchableOpacity style={styles.searchBarOverlay} onPress={() => navigation.navigate('Search')}>
+                            <SearchBar isEditable={false} query={null} setQuery={null} searchFromQuery={null} onPress={() => navigation.navigate('Search')} />
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.innerContainer}>
+                        <AnimationView option={3} />
+                    </View>
+                </>
+            )}
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
