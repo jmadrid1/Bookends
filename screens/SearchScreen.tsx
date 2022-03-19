@@ -26,12 +26,12 @@ export const SearchScreen = (props: IProps) => {
             if (res.status === 200) {
                 const results = res.data.results;
                 setSearchResults(results)
-            }else{
+            } else {
                 setAnimationOption(2)
                 setSearchResults([])
                 setLoading(false)
             }
-        }else{
+        } else {
             setSearchResults([])
             setLoading(false)
         }
@@ -47,7 +47,7 @@ export const SearchScreen = (props: IProps) => {
 
     useEffect(() => {
         setAnimationOption(1)
-      }, [])
+    }, [])
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -59,41 +59,39 @@ export const SearchScreen = (props: IProps) => {
         };
     }, [query]);
 
-    if (!isLoading){
-        return (
-            <View style={styles.container}>
-                <View style={styles.searchBarContainer}>
-                    <SearchBar isEditable={true} query={query} setQuery={setQuery} searchFromQuery={searchFromQuery} onPress={null}/>
-                </View>
-    
-                <View style={styles.innerContainer}>
-                    {searchResults.length > 0 &&
-                        <FlatList
-                            data={searchResults}
-                            renderItem={renderItem}
-                        />
-                    }
-                    {
-                        searchResults.length === 0 && (<AnimationView option={animationOption}/>)
-                    }
-                </View>
-            </View>
-        );
-    }else{
-        return (
-            <View style={styles.container}>
-                <View style={styles.searchBarContainer}>
-                    <SearchBar isEditable={true} query={query} setQuery={setQuery} searchFromQuery={searchFromQuery} onPress={null}/>
-                </View>
-    
-                <View style={styles.innerContainer}>
-                    <AnimationView option={3}/>
-                </View>
-            </View>
-        );
-    }
+    return (
+        <View style={styles.container}>
+            {!isLoading ? (
+                <>
+                    <View style={styles.searchBarContainer}>
+                        <SearchBar isEditable={true} query={query} setQuery={setQuery} searchFromQuery={searchFromQuery} onPress={null} />
+                    </View>
 
-    
+                    <View style={styles.innerContainer}>
+                        {searchResults.length > 0 &&
+                            <FlatList
+                                data={searchResults}
+                                renderItem={renderItem}
+                            />
+                        }
+                        {
+                            searchResults.length === 0 && (<AnimationView option={animationOption} />)
+                        }
+                    </View>
+                </>
+            ) : (
+                <>
+                    <View style={styles.searchBarContainer}>
+                        <SearchBar isEditable={true} query={query} setQuery={setQuery} searchFromQuery={searchFromQuery} onPress={null} />
+                    </View>
+
+                    <View style={styles.innerContainer}>
+                        <AnimationView option={3} />
+                    </View>
+                </>
+            )}
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
