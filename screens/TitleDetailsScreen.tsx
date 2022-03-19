@@ -48,49 +48,48 @@ export const TitleDetailsScreen = (props: IProps) => {
         );
     };
 
-    if (!isLoading){
-        return (
-            <ScrollView style={styles.scrollViewContainer}>
-                <View style={styles.banner}>
-                    <ImageBackground style={styles.thumbnailBackground} source={{ uri: title.image }} blurRadius={5}>
-                        <View style={styles.thumbnailContainer}>
-                            <Image style={styles.thumbnail} source={{ uri: title.image }} />
-                        </View>
-                        <View style={styles.titleContainer}>
-                            <Text numberOfLines={1} style={styles.title}>{title.title}</Text>
-                        </View>
-                    </ImageBackground>
-                </View>
+    return (
+        <ScrollView style={styles.scrollViewContainer}>
+            {!isLoading ? (
+                <>
+                    <View style={styles.banner}>
+                        <ImageBackground style={styles.thumbnailBackground} source={{ uri: title.image }} blurRadius={5}>
+                            <View style={styles.thumbnailContainer}>
+                                <Image style={styles.thumbnail} source={{ uri: title.image }} />
+                            </View>
+                            <View style={styles.titleContainer}>
+                                <Text numberOfLines={1} style={styles.title}>{title.title}</Text>
+                            </View>
+                        </ImageBackground>
+                    </View>
 
-                <DetailContainer detailTitle={'Genre'} detail={title.genres} />
-                <DetailContainer detailTitle={'Director'} detail={title.directors} />
-                <DetailContainer detailTitle={'Writer'} detail={title.writers} />
-                <DetailContainer detailTitle={'Stars'} detail={title.stars} />
+                    <DetailContainer detailTitle={'Genre'} detail={title.genres} />
+                    <DetailContainer detailTitle={'Director'} detail={title.directors} />
+                    <DetailContainer detailTitle={'Writer'} detail={title.writers} />
+                    <DetailContainer detailTitle={'Stars'} detail={title.stars} />
 
-                <View style={styles.summaryContainer}>
-                    <Text style={styles.summaryText}>{title.plot}</Text>
-                </View>
+                    <View style={styles.summaryContainer}>
+                        <Text style={styles.summaryText}>{title.plot}</Text>
+                    </View>
 
-                <Header title={'More like this'} />
-                <View style={styles.moreScrollViewContainer} >
-                    <FlatList
-                        horizontal={true}
-                        data={title.similars}
-                        renderItem={renderItem}
-                    />
-                </View>
-
-            </ScrollView>
-        )
-    } else {
-        return (
-            <ScrollView style={styles.scrollViewContainer}>
-                <View style={styles.innerContainer}>
-                    <AnimationView option={3}/>
-                </View>
-            </ScrollView>
-        )
-    }
+                    <Header title={'More like this'} />
+                    <View style={styles.moreScrollViewContainer} >
+                        <FlatList
+                            horizontal={true}
+                            data={title.similars}
+                            renderItem={renderItem}
+                        />
+                    </View>
+                </>
+            ) : (
+                <>
+                    <View style={styles.innerContainer}>
+                        <AnimationView option={3} />
+                    </View>
+                </>
+            )}
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
