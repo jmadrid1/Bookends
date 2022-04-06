@@ -7,6 +7,7 @@ import Header from '../components/header/Header';
 import { Endpoints } from "../util/Constants";
 import axios from "axios";
 import AnimationView from '../components/animationView/AnimationView';
+import GenreContainer from '../components/genreContainer/genreContainer';
 
 const { width } = Dimensions.get('screen')
 
@@ -63,7 +64,7 @@ export const TitleDetailsScreen = (props: IProps) => {
                         </ImageBackground>
                     </View>
 
-                    <DetailContainer detailTitle={'Genre'} detail={title.genres} />
+                    <GenreContainer genres={title.genres}/>
                     <DetailContainer detailTitle={'Director'} detail={title.directors} />
                     <DetailContainer detailTitle={'Writer'} detail={title.writers} />
                     <DetailContainer detailTitle={'Stars'} detail={title.stars} />
