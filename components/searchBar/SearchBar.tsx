@@ -6,12 +6,25 @@ const { width } = Dimensions.get('screen')
 
 type IProps = {
     isEditable: boolean;
-    query: string;
-    onPress: () => void;
     setQuery: Dispatch<SetStateAction<string>>;
     searchFromQuery: (query: string) => Promise<void>;
 }
 
+/**
+ * @param {{ 
+ * isEditable: boolean,
+ * setQuery: Dispatch<SetStateAction<string>>,
+ * searchFromQuery: (query: string) => Promise<void>,
+ * onPress: () => void
+ * }} props 
+ * @returns
+ */
+
+/**
+ * SearchBar is a custom TextInput component for entering search queries.
+ * This component receives isEditable as a boolean to disable text input. 
+ * Additionally, receives setQuery() & searchFromQuery() as a prop.
+ */
 const SearchBar = (props: IProps) => {
     const { isEditable, setQuery, searchFromQuery } = props;
 
