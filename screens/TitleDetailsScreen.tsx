@@ -7,7 +7,7 @@ import Header from '../components/header/Header';
 import { Endpoints } from "../util/Constants";
 import axios from "axios";
 import AnimationView from '../components/animationView/AnimationView';
-import GenreContainer from '../components/genreContainer/genreContainer';
+import GenreContainer from '../components/genreContainer/GenreContainer';
 
 const { width } = Dimensions.get('screen')
 
@@ -17,6 +17,20 @@ type IProps = {
     selectedTitle?: Title;
 }
 
+/**
+ * @param {{ 
+ * navigation: any,
+ * route: any,
+ * selectedTitle: Title
+ * }} props 
+ * @returns
+ */
+
+/**
+ * TitleDetailsScreen displays a selected title's information. This screen receives
+ * the selectedTitle Title object HomeScreen from is passed React's navigation & route 
+ * as props for navigating between screens and passing data.
+ */
 export const TitleDetailsScreen = (props: IProps) => {
     const { navigation } = props;
     const { selectedTitle } = props.route.params
@@ -28,24 +42,20 @@ export const TitleDetailsScreen = (props: IProps) => {
         getTitleInfo(selectedTitle.id);
     }, [])
 
-    let id: string = selectedTitle.id
+    //Fetches additional data for the selectedTitle from API
     const getTitleInfo = async (id: string) => {
         const url = Endpoints.searchTitleEndpoint + id
-
         const title: Title = await axios.get(url).then(res => {
             const title: Title = res.data
             return title
         })
-
         setTitle(title)
         setLoading(false)
     }
 
     const renderItem = ({ item }) => {
         return (
-            <View style={styles.container} key={item.id}>
-                <TitleRow title={item} navigation={navigation} />
-            </View>
+            <TitleRow key={item.id} title={item} navigation={navigation} />
         );
     };
 
