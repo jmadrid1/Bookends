@@ -13,9 +13,20 @@ interface IProps {
     route: any;
 }
 
+/**
+ * @param {{ 
+ * navigation: any,
+ * route: any,
+ * }} props 
+ * @returns
+ */
+
+/**
+ * HomeScreen displays a list of popular & acclaimed titles. This screen is passed React's
+ *  navigation & route as props for navigating between screens and passing data.
+ */
 export const HomeScreen = (props: IProps) => {
     const { navigation } = props;
-
     const [popularTitles, setPopularTitles] = useState<Title[]>([]);
     const [acclaimedTitles, setAcclaimedTitles] = useState<Title[]>([]);
     const [isLoading, setLoading] = useState(true)
@@ -25,20 +36,19 @@ export const HomeScreen = (props: IProps) => {
         getAcclaimedTitles();
     }, [])
 
+    //Fetches popular titles from API
     const getPopularTitles = async () => {
         const url = Endpoints.popularMoviesEndpoint
-
         const titles = await axios.get(url).then(res => {
             const titles = res.data.items;
             return titles
         })
-
         setPopularTitles(titles)
     }
 
-    const getAcclaimedTitles = async (): Promise<void> => {
+    //Fetches acclaimed titles from API
+    const getAcclaimedTitles = async () => {
         const url = Endpoints.topMoviesEndpoint
-
         const titles = await axios.get(url).then(res => {
             const titles = res.data.items;
             return titles
@@ -49,9 +59,7 @@ export const HomeScreen = (props: IProps) => {
 
     const renderItem = ({ item }) => {
         return (
-            <View key={item.id}>
-                <TitleRow title={item} navigation={navigation} />
-            </View>
+            <TitleRow key={item.id} title={item} navigation={navigation} />
         );
     };
 
@@ -61,7 +69,7 @@ export const HomeScreen = (props: IProps) => {
                 <>
                     <View style={styles.searchBarContainer}  >
                         <TouchableOpacity style={styles.searchBarOverlay} onPress={() => navigation.navigate('Search')}>
-                            <SearchBar isEditable={false} query={null} setQuery={null} searchFromQuery={null} onPress={() => navigation.navigate('Search')} />
+                            <SearchBar isEditable={false} setQuery={null} searchFromQuery={null} />
                         </TouchableOpacity>
                     </View>
 
