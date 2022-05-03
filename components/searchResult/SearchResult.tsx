@@ -7,6 +7,19 @@ interface IProps {
     navigation: any;
 }
 
+/**
+ * @param {{ 
+ * title: SearchQueryResult,
+ * navigation: any
+ * }} props 
+ * @returns
+ */
+
+/**
+ * SearchResult is a row component for display search results in a list.
+ * This component receives title as a SearchQueryResult object to populate the data of a search result.
+ * Additionally, receives navigation for navigating to the TitleDetailsScreen.
+ */
 const SearchResult = (props: IProps) => {
     const { title } = props;
     const { navigation } = props;
