@@ -8,6 +8,19 @@ interface IProps {
     navigation: any;
 }
 
+/**
+ * @param {{ 
+ * title: Title,
+ * navigation: any
+ * }} props 
+ * @returns
+ */
+
+/**
+ * TitleRow is a row component that displays the data of title.
+ * This component receives title as a Title object to populate the data of a title.
+ * Additionally, receives navigation for navigating to the TitleDetailsScreen.
+ */
 const TitleRow = (props: IProps) => {
     const { title } = props;
     const { navigation } = props;
