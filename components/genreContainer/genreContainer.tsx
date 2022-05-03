@@ -6,6 +6,17 @@ type IProps = {
     genres: string
 }
 
+/**
+ * @param {{ 
+ * genres: string
+ * }} props 
+ * @returns
+ */
+
+/**
+ * GenreContainer is the wrapper for containing for the GenreBubble components.
+ * This component receives genres as a string & creates bubbles for each genre.
+ */
 const GenreContainer = (props: IProps) => {
     const { genres } = props;
     const genresArr = genres.split(", ")
