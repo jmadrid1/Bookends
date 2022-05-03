@@ -5,6 +5,17 @@ type IProps = {
     title: string;
 }
 
+/**
+ * @param {{ 
+ * title: string
+ * }} props 
+ * @returns
+ */
+
+/**
+ * Header is the wrapper for containing title header in TitlesDetailsScreen.
+ * This component receives title as a string prop for specifying the header for the title.
+ */
 const Header = (props: IProps) => {
     const { title } = props;
 
