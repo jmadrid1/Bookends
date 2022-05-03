@@ -6,6 +6,19 @@ type IProps = {
     detail: string;
 }
 
+/**
+ * @param {{ 
+ * detailTitle: string,
+ * detail: string
+ * }} props 
+ * @returns
+ */
+
+/**
+ * DetailContainer is the wrapper for containing title details views in TitlesDetailsScreen.
+ * This component receives detailTitle for specifying the header for the container & detail
+ * for adding the text associated to the header.
+ */
 const DetailContainer = (props: IProps) => {
     const { detailTitle, detail } = props;
 
