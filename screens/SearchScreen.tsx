@@ -11,6 +11,17 @@ type IProps = {
     navigation: any;
 }
 
+/**
+ * @param {{ 
+ * navigation: any,
+ * }} props 
+ * @returns
+ */
+
+/**
+ * SearchScreen displays the results from a search query.
+ * This screen is passed React's navigation for navigating between screens and passing data.
+ */
 export const SearchScreen = (props: IProps) => {
     const { navigation } = props;
     const [query, setQuery] = useState('')
@@ -18,6 +29,21 @@ export const SearchScreen = (props: IProps) => {
     const [animationOption, setAnimationOption] = useState(1);
     const [isLoading, setLoading] = useState(true)
 
+    useEffect(() => {
+        setAnimationOption(1)
+    }, [])
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            searchFromQuery(query);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [query]);
+
+    //Fetches search results from API based off of query parameter
     const searchFromQuery = async (query: string) => {
         if (query !== "") {
             const url = Endpoints.searchEndpoint + query
@@ -39,32 +65,20 @@ export const SearchScreen = (props: IProps) => {
 
     const renderItem = ({ item }) => {
         return (
-            <View style={styles.resultsContainer} key={item.id}>
-                <SearchResult title={item} navigation={navigation} />
-            </View>
+            <SearchResult key={item.id} title={item} navigation={navigation} />
         );
     };
-
-    useEffect(() => {
-        setAnimationOption(1)
-    }, [])
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            searchFromQuery(query);
-        }, 1000);
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [query]);
 
     return (
         <View style={styles.container}>
             {!isLoading ? (
                 <>
                     <View style={styles.searchBarContainer}>
-                        <SearchBar isEditable={true} query={query} setQuery={setQuery} searchFromQuery={searchFromQuery} onPress={null} />
+                        <SearchBar
+                            isEditable={true}
+                            setQuery={setQuery}
+                            searchFromQuery={searchFromQuery}
+                        />
                     </View>
 
                     <View style={styles.innerContainer}>
@@ -81,9 +95,13 @@ export const SearchScreen = (props: IProps) => {
                 </>
             ) : (
                 <>
-                    <View style={styles.searchBarContainer}>
-                        <SearchBar isEditable={true} query={query} setQuery={setQuery} searchFromQuery={searchFromQuery} onPress={null} />
-                    </View>
+                        <View style={styles.searchBarContainer}>
+                            <SearchBar
+                                isEditable={true}
+                                setQuery={setQuery}
+                                searchFromQuery={searchFromQuery}
+                            />
+                        </View>
 
                     <View style={styles.innerContainer}>
                         <AnimationView option={3} />
@@ -111,16 +129,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         backgroundColor: 'white'
-    },
-
-    resultsContainer: {
-        flexDirection: 'column',
-        height: 130,
-        width: '100%',
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 10,
     },
 
     searchBarContainer: {
