@@ -5,6 +5,17 @@ interface IProps {
     genre: string,
 }
 
+/**
+ * @param {{ 
+ * genre: string
+ * }} props 
+ * @returns
+ */
+
+/**
+ * GenreBubble is a component that is shaped like a rounded bubble that holds a label.
+ * This component receives a genre as string prop for populating the text in the bubble.
+ */
 const GenreBubble = (props: IProps) => {
     const { genre } = props;
     return (
